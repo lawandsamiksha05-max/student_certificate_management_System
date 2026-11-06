@@ -1,0 +1,276 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0F172A;
+    display:flex;
+}
+
+/* ================= Sidebar ================= */
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:#111827;
+    position:fixed;
+    padding:25px;
+    box-shadow:5px 0 20px rgba(0,0,0,.25);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:40px;
+    color:#fff;
+}
+
+.logo i{
+    font-size:30px;
+    color:#3B82F6;
+}
+
+.logo h3{
+    font-weight:600;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    margin-bottom:12px;
+}
+
+.sidebar ul li a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    text-decoration:none;
+    color:#CBD5E1;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.sidebar ul li a:hover{
+    background:#2563EB;
+    color:#fff;
+}
+
+.active a{
+    background:#2563EB;
+    color:#fff !important;
+}
+
+/* ================= Main ================= */
+
+.main{
+
+    margin-left:250px;
+    width:100%;
+    min-height:100vh;
+    padding:30px;
+
+    background-image:url("../images/dashboard-bg.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+}
+
+/* ================= Top Bar ================= */
+
+.topbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(15,23,42,.70);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:22px 28px;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.30);
+
+}
+
+.topbar h2{
+    color:#fff;
+    font-size:32px;
+    font-weight:700;
+}
+
+.topbar p{
+    color:#CBD5E1;
+    margin-top:5px;
+}
+
+.right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.right i{
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.right img{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.25);
+}
+
+/* ================= Cards ================= */
+
+.card-box{
+
+    background:rgba(15,23,42,.70);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    height:220px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+.card-box:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(37,99,235,.35);
+
+}
+
+.card-box i{
+    font-size:30px;
+    color:#60A5FA;
+    margin-bottom:15px;
+}
+.card-box h2{
+    color:#fff;
+    font-size:32px;
+    font-weight:700;
+}
+
+.card-box p{
+    color:#CBD5E1;
+    font-size:16px;
+    margin-top:5px;
+}
+
+/* ================= Responsive ================= */
+/* ================= Cards ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.card-box{
+
+    background:rgba(15,23,42,.70);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:18px;
+
+    padding:20px;
+    height:200px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+.card-box:hover{
+    transform:translateY(-5px);
+}
+
+.card-box i{
+    font-size:32px;
+    color:#60A5FA;
+    margin-bottom:15px;
+}
+
+.card-box h2{
+    font-size:42px;
+    color:#fff;
+    margin-bottom:8px;
+}
+
+.card-box p{
+    font-size:18px;
+    color:#CBD5E1;
+}
+/* ================= Responsive ================= */
+
+@media (max-width:1200px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:768px){
+
+    .sidebar{
+        width:80px;
+    }
+
+    .sidebar h3{
+        display:none;
+    }
+
+    .sidebar a{
+        justify-content:center;
+    }
+
+    .sidebar a span{
+        display:none;
+    }
+
+    .main{
+        margin-left:80px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+}

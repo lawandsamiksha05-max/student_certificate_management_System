@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Certificate Management</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ================= Body ================= */
+
+body{
+    background:
+        linear-gradient(rgba(15,23,42,0.55), rgba(37,99,235,0.45)),
+        url("/static/images/student_bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+    padding: 30px;
+}
+/* ================= Container ================= */
+
+.container-fluid{
+    max-width:1600px;
+    margin:auto;
+}
+
+/* ================= Toolbar ================= */
+/* ================= Toolbar ================= */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:25px 30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+/* Left Side */
+
+.toolbar-left h2{
+    color:#1E3A8A;
+    font-size:36px;
+    font-weight:700;
+    margin:0;
+}
+
+.toolbar-left h2 i{
+    color:#3B82F6;
+    margin-right:12px;
+}
+
+.toolbar-left p{
+    color:#111827;
+    font-size:16px;
+    font-weight:500;
+    margin-top:6px;
+    margin-bottom:0;
+}
+
+/* Right Side */
+
+.toolbar-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.toolbar-left p{
+
+    color:#E5E7EB;
+    font-size:15px;
+    margin-top:6px;
+    margin-bottom:0;
+
+}
+
+.toolbar-right{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+
+}
+
+/* ================= Buttons ================= */
+
+.btn-primary{
+
+    background:#2563EB;
+    border:none;
+    border-radius:10px;
+    padding:10px 20px;
+    color:#fff;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+    background:#1D4ED8;
+    color:#fff;
+    transform:translateY(-2px);
+
+}
+
+/* ================= Table Card ================= */
+
+.table-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
+
+/* ================= Table ================= */
+
+.table{
+
+    margin:0;
+
+}
+
+.table thead th{
+
+    background:#2563EB !important;
+
+    color:#fff !important;
+
+    padding:12px 16px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    border:none;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+.table tbody td{
+
+    padding:10px 16px;
+
+    font-size:15px;
+
+    vertical-align:middle;
+
+    border-top:1px solid #EDF2F7;
+
+}
+
+.table tbody tr:nth-child(even){
+
+    background:#F8FAFC;
+
+}
+
+.table tbody tr:hover{
+
+    background:#EAF3FF;
+
+    transition:.25s;
+
+}
+
+/* ================= Status Badge ================= */
+
+.badge{
+
+    padding:7px 14px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    border-radius:30px;
+
+}
+
+/* ================= Action Buttons ================= */
+
+.action-btn{
+
+    width:36px;
+    height:36px;
+
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:10px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    margin-right:6px;
+
+    transition:.3s;
+
+}
+
+.generate-btn{
+
+    background:#22C55E;
+
+}
+
+.generate-btn:hover{
+
+    background:#16A34A;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+.edit-btn{
+
+    background:#F59E0B;
+
+}
+
+.edit-btn:hover{
+
+    background:#D97706;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+.delete-btn{
+
+    background:#EF4444;
+
+}
+
+.delete-btn:hover{
+
+    background:#DC2626;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+/* ================= Responsive ================= */
+
+@media(max-width:992px){
+
+.toolbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.toolbar-right{
+
+    width:100%;
+
+    justify-content:flex-start;
+
+}
+
+.btn-primary{
+
+    width:100%;
+
+}
+
+.table{
+
+    font-size:14px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<div class="toolbar">
+
+<div class="toolbar-left">
+
+<h2>
+
+<i class="fa-solid fa-certificate"></i>
+
+Certificate Management
+
+</h2>
+
+<p>
+
+Generate, edit and manage student certificates.
+
+</p>
+
+</div>
+
+<div class="toolbar-right">
+
+<a href="/add_certificate" class="btn btn-primary">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Certificate
+
+</a>
+
+</div>
+
+</div>
+
+<div class="table-card">
+
+<table class="table table-hover align-middle">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Student Name</th>
+<th>Certificate Type</th>
+<th>Issue Date</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if certificates %}
+
+{% for certificate in certificates %}
+
+<tr>
+
+<td>{{ certificate[0] }}</td>
+
+<td>{{ certificate[1] }}</td>
+
+<td>{{ certificate[2] }}</td>
+
+<td>{{ certificate[3] }}</td>
+
+<td>
+
+{% if certificate[4]=="Generated" %}
+
+<span class="badge bg-success">
+
+{{ certificate[4] }}
+
+</span>
+
+{% else %}
+
+<span class="badge bg-warning text-dark">
+
+{{ certificate[4] }}
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a href="/generate_certificate/{{ certificate[0] }}"
+class="action-btn generate-btn"
+title="Generate">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</a>
+
+<a href="/edit_certificate/{{ certificate[0] }}"
+class="action-btn edit-btn"
+title="Edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<a href="/delete_certificate/{{ certificate[0] }}"
+class="action-btn delete-btn"
+onclick="return confirm('Delete this certificate?')"
+title="Delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="6" class="text-center p-4">
+
+No Certificates Found.
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

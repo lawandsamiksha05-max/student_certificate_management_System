@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Certificate Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/ai.css') }}">
+
+</head>
+
+<body>
+
+<div class="ai-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🤖
+            </div>
+
+            <div>
+                <h2>Certificate AI</h2>
+                <span>Smart Assistant</span>
+            </div>
+
+        </div>
+
+
+        <button class="new-chat"
+                onclick="newChat()">
+
+            <span>＋</span>
+            New Chat
+
+        </button>
+
+
+        <div class="sidebar-section">
+
+            <p class="section-title">
+                QUICK QUESTIONS
+            </p>
+
+            <button onclick="quickQuestion('How many students are registered?')">
+                👨‍🎓 Student Count
+            </button>
+
+            <button onclick="quickQuestion('How many certificates are there?')">
+                📜 Certificate Count
+            </button>
+
+            <button onclick="quickQuestion('Show recent students')">
+                🕐 Recent Students
+            </button>
+
+            <button onclick="quickQuestion('Show pending certificates')">
+                ⏳ Pending Certificates
+            </button>
+
+            <button onclick="quickQuestion('Show generated certificates')">
+                ✅ Generated Certificates
+            </button>
+
+        </div>       
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/dashboard">
+                ← Back to Dashboard
+            </a>
+
+            <a href="/logout">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CHAT ================= -->
+
+    <main class="chat-area">
+
+
+        <!-- HEADER -->
+
+        <header class="chat-header">
+
+            <div class="assistant-title">
+
+                <div class="header-avatar">
+
+                    <img src="{{ url_for('static',
+                         filename='images/robot.png') }}"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='🤖';">
+
+                </div>
+
+                <div>
+
+                    <h1>AI Certificate Assistant</h1>
+
+                    <div class="online-status">
+
+                        <span></span>
+
+                        Online • Ready to help
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button onclick="clearChat()"
+                        title="Clear Chat">
+
+                    🗑
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CHAT ================= -->
+
+        <section id="chatBox"
+                 class="chat-box">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome-message">
+
+                <div class="welcome-avatar">
+
+                    <img src="{{ url_for('static',
+                         filename='images/robot.png') }}"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='🤖';">
+
+                </div>
+
+                <h2>
+                    Hello! 👋
+                </h2>
+
+                <p>
+                    I'm your AI Certificate Assistant.
+                    Ask me anything about your Student
+                    Certificate Management System.
+                </p>
+
+                <div class="suggestion-grid">
+
+                    <button onclick="quickQuestion('How many students are registered?')">
+
+                        👨‍🎓
+                        <span>Student Count</span>
+
+                    </button>
+
+
+                    <button onclick="quickQuestion('How many certificates are there?')">
+
+                        📜
+                        <span>Certificates</span>
+
+                    </button>
+
+
+                    <button onclick="quickQuestion('Show pending certificates')">
+
+                        ⏳
+                        <span>Pending Certificates</span>
+
+                    </button>
+
+
+                    <button onclick="quickQuestion('Show recent students')">
+
+                        👥
+                        <span>Recent Students</span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INPUT ================= -->
+
+        <div class="input-area">
+
+            <div class="input-wrapper">
+
+                <textarea
+                    id="question"
+                    placeholder="Message Certificate AI..."
+                    rows="1"
+                    onkeydown="handleKey(event)"></textarea>
+
+
+                <button id="sendButton"
+                        onclick="sendQuestion()"
+                        title="Send">
+
+                    ➤
+
+                </button>
+
+            </div>
+
+            <p class="input-info">
+
+                AI can make mistakes. Check important
+                certificate information before using it.
+
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const chatBox = document.getElementById("chatBox");
+const questionInput = document.getElementById("question");
+const sendButton = document.getElementById("sendButton");
+
+
+// =====================================================
+// SEND QUESTION
+// =====================================================
+
+async function sendQuestion(){
+
+    let question = questionInput.value.trim();
+
+    if(!question){
+        return;
+    }
+
+
+    // Show user message
+    chatBox.innerHTML += `
+        <div class="message user-message">
+            <div class="message-content">
+                <div class="message-name">
+                    You
+                </div>
+                <p>${escapeHTML(question)}</p>
+            </div>
+        </div>
+    `;
+
+
+    questionInput.value = "";
+
+
+    let typing = addTyping();
+
+
+    try{
+
+        const response = await fetch("/ask_ai",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                question:question
+
+            })
+
+        });
+
+
+        const data = await response.json();
+
+
+        typing.remove();
+
+
+        chatBox.innerHTML += `
+
+        <div class="message bot-message">
+
+            <div class="message-content">
+
+                <div class="message-name">
+                    Certificate AI
+                </div>
+
+                <p>
+                    ${formatMessage(data.answer)}
+                </p>
+
+            </div>
+
+        </div>
+
+        `;
+
+
+        // Open page automatically
+        if(data.action === "open_page"){
+
+            window.location.href = data.url;
+
+        }
+
+
+    }
+    catch(error){
+
+        console.log("AI ERROR:",error);
+
+        typing.remove();
+
+
+        chatBox.innerHTML += `
+
+        <div class="message bot-message">
+
+            <div class="message-content">
+
+                <div class="message-name">
+                    Certificate AI
+                </div>
+
+                <p>
+                    ❌ Unable to connect to the AI assistant.
+                </p>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    scrollToBottom();
+
+}
+
+
+// =====================================================
+// USER MESSAGE
+// =====================================================
+
+function addUserMessage(message) {
+
+    const messageDiv = document.createElement("div");
+
+    messageDiv.className = "message user-message";
+
+
+    messageDiv.innerHTML = `
+
+        <div class="message-content">
+
+            <div class="message-text"></div>
+
+        </div>
+
+        <div class="message-avatar">
+
+            <img
+                src="/static/images/user.png"
+                onerror="this.style.display='none'; this.parentElement.innerHTML='👤';"
+            >
+
+        </div>
+
+    `;
+
+
+    messageDiv.querySelector(".message-text").textContent =
+        message;
+
+
+    chatBox.appendChild(messageDiv);
+
+    scrollToBottom();
+
+}
+
+
+// =====================================================
+// BOT MESSAGE
+// =====================================================
+
+function addBotMessage(message) {
+
+    const messageDiv = document.createElement("div");
+
+    messageDiv.className = "message bot-message";
+
+
+    messageDiv.innerHTML = `
+
+        <div class="message-avatar">
+
+            <img
+                src="/static/images/robot.png"
+                onerror="this.style.display='none'; this.parentElement.innerHTML='🤖';"
+            >
+
+        </div>
+
+        <div class="message-content">
+
+            <div class="message-name">
+                Certificate AI
+            </div>
+
+            <div class="message-text">
+                ${formatMessage(message)}
+            </div>
+
+        </div>
+
+    `;
+
+
+    chatBox.appendChild(messageDiv);
+
+    scrollToBottom();
+
+}
+
+
+// =====================================================
+// FORMAT AI RESPONSE
+// =====================================================
+
+function formatMessage(text) {
+
+    if (!text) {
+        return "";
+    }
+
+
+    // Escape HTML first
+
+    text = escapeHTML(text);
+
+
+    // Code blocks
+
+    text = text.replace(
+        /```([\s\S]*?)```/g,
+        '<pre><code>$1</code></pre>'
+    );
+
+
+    // Bold
+
+    text = text.replace(
+        /\*\*(.*?)\*\*/g,
+        "<strong>$1</strong>"
+    );
+
+
+    // Headings
+
+    text = text.replace(
+        /^### (.*?)$/gm,
+        "<h3>$1</h3>"
+    );
+
+
+    // Bullet points
+
+    text = text.replace(
+        /^[•-] (.*?)$/gm,
+        "<li>$1</li>"
+    );
+
+
+    // New lines
+
+    text = text.replace(
+        /\n/g,
+        "<br>"
+    );
+
+
+    return text;
+
+}
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+// =====================================================
+// TYPING INDICATOR
+// =====================================================
+
+function addTyping() {
+
+    const typing = document.createElement("div");
+
+    typing.className = "message bot-message typing-message";
+
+
+    typing.innerHTML = `
+
+        <div class="message-avatar">
+
+            <img
+                src="/static/images/robot.png"
+                onerror="this.style.display='none'; this.parentElement.innerHTML='🤖';"
+            >
+
+        </div>
+
+        <div class="message-content">
+
+            <div class="message-name">
+                Certificate AI
+            </div>
+
+            <div class="typing">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    chatBox.appendChild(typing);
+
+    scrollToBottom();
+
+
+    return typing;
+
+}
+
+
+// =====================================================
+// QUICK QUESTION
+// =====================================================
+
+function quickQuestion(question) {
+
+    questionInput.value = question;
+
+    sendQuestion();
+
+}
+
+
+// =====================================================
+// NEW CHAT
+// =====================================================
+
+function newChat() {
+
+    chatBox.innerHTML = `
+
+        <div class="welcome-message">
+
+            <div class="welcome-avatar">
+                🤖
+            </div>
+
+            <h2>
+                New conversation
+            </h2>
+
+            <p>
+                What would you like to know?
+            </p>
+
+        </div>
+
+    `;
+
+    questionInput.focus();
+
+}
+
+
+// =====================================================
+// CLEAR CHAT
+// =====================================================
+
+function clearChat() {
+
+    if (!confirm("Clear this conversation?")) {
+        return;
+    }
+
+    newChat();
+
+}
+
+
+// =====================================================
+// ENTER KEY
+// =====================================================
+
+function handleKey(event) {
+
+    if (event.key === "Enter" && !event.shiftKey) {
+
+        event.preventDefault();
+
+        sendQuestion();
+
+    }
+
+}
+
+
+// =====================================================
+// AUTO RESIZE
+// =====================================================
+
+questionInput.addEventListener(
+    "input",
+    function() {
+
+        this.style.height = "auto";
+
+        this.style.height =
+            Math.min(this.scrollHeight, 150) + "px";
+
+    }
+);
+
+
+// =====================================================
+// SCROLL
+// =====================================================
+
+function scrollToBottom() {
+
+    setTimeout(() => {
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }, 50);
+
+}
+
+
+// =====================================================
+// FOCUS
+// =====================================================
+
+questionInput.focus();
+
+</script>
+
+</body>
+</html>

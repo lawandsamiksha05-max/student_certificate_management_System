@@ -1,0 +1,234 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:url("/static/images/student_bg.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
+}
+
+/* Container */
+
+.container{
+    margin-top:40px;
+    max-width:1500px;
+}
+
+/* ================= Top Section ================= */
+
+.top-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+/* Buttons */
+
+.btn-primary{
+    background:linear-gradient(90deg,#2563EB,#3B82F6);
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-weight:600;
+    font-size:16px;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    background:linear-gradient(90deg,#1D4ED8,#2563EB);
+}
+
+.btn-success{
+    background:linear-gradient(90deg,#16A34A,#22C55E);
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-weight:600;
+    font-size:16px;
+    box-shadow:0 8px 20px rgba(34,197,94,.25);
+    transition:.3s;
+}
+
+.btn-success:hover{
+    transform:translateY(-2px);
+}
+
+/* Upload */
+
+.upload-form{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+input[type=file]{
+    width:420px;
+    border-radius:12px;
+    height:48px;
+}
+
+/* ================= Table Card ================= */
+
+.table-card{
+    background:#ffffff;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #dbeafe;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+/* Table */
+
+.table{
+    margin:0;
+}
+
+/* Header */
+
+.table thead{
+    background:linear-gradient(90deg,#2563EB,#3B82F6);
+}
+
+.table thead th{
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    padding:18px 20px;
+    border:none;
+}
+
+/* Body */
+
+.table tbody td{
+    padding:18px 20px;
+    font-size:15px;
+    color:#374151;
+    border-bottom:1px solid #edf2f7;
+    vertical-align:middle;
+}
+
+/* Alternate Row Colors */
+
+.table tbody tr:nth-child(even){
+    background:#fafcff;
+}
+
+.table tbody tr:nth-child(odd){
+    background:#ffffff;
+}
+
+/* Hover */
+
+.table tbody tr{
+    transition:.25s;
+}
+
+.table tbody tr:hover{
+    background:#eaf4ff;
+}
+
+/* First Column */
+
+.table tbody td:first-child{
+    font-weight:700;
+    color:#2563EB;
+}
+
+/* Name */
+
+.table tbody td:nth-child(3){
+    font-weight:600;
+    color:#111827;
+}
+
+/* Department */
+
+.table tbody td:nth-child(4){
+    color:#2563EB;
+    font-weight:500;
+}
+
+/* ================= Action Buttons ================= */
+
+.action-column{
+    white-space:nowrap;
+}
+
+.action-btn{
+    width:42px;
+    height:42px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    color:#fff;
+    text-decoration:none;
+    margin-right:8px;
+    transition:.3s;
+}
+
+.edit-btn{
+    background:#FBBF24;
+}
+
+.edit-btn:hover{
+    background:#F59E0B;
+    transform:translateY(-2px);
+}
+
+.delete-btn{
+    background:#EF4444;
+}
+
+.delete-btn:hover{
+    background:#DC2626;
+    transform:translateY(-2px);
+}
+
+/* Rounded Header */
+
+.table thead th:first-child{
+    border-top-left-radius:18px;
+}
+
+.table thead th:last-child{
+    border-top-right-radius:18px;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.top-section{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.upload-form{
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+}
+
+input[type=file]{
+    width:100%;
+}
+
+.table{
+    font-size:14px;
+}
+
+}

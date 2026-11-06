@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Bonafide Certificate</title>
+
+
+<style>
+
+@page{
+    size:A4 portrait;
+    margin:0;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    width:794px;
+    height:1123px;
+
+    font-family:"Georgia","Times New Roman",serif;
+
+    background:white;
+
+}
+
+
+
+.certificate{
+
+
+    width:794px;
+    height:1123px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:12px solid #0B3C6F;
+
+    background:white;
+
+}
+
+
+
+/* Software Background Image */
+
+
+.bg-image{
+
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
+    width:350px;
+
+    opacity:0.08;
+
+}
+
+
+.bg-image img{
+
+    width:100%;
+
+}
+
+
+
+
+
+.inner{
+
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+    right:20px;
+    bottom:20px;
+
+    border:3px solid #D4AF37;
+
+}
+
+
+
+.content{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+
+
+
+
+.logo img{
+
+
+    width:110px;
+
+    height:110px;
+
+
+}
+
+
+
+
+.college-name{
+
+
+    margin-top:15px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#003366;
+
+
+}
+
+
+
+.subtitle{
+
+    font-size:18px;
+
+    margin-top:8px;
+
+}
+
+
+
+
+
+.title{
+
+
+    margin-top:50px;
+
+    font-size:40px;
+
+    color:#003366;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
+
+
+
+
+
+.line{
+
+    width:200px;
+
+    border-top:3px solid #D4AF37;
+
+    margin:20px auto;
+
+}
+
+
+
+
+
+.description{
+
+
+    margin-top:45px;
+
+    font-size:22px;
+
+    line-height:2;
+
+    text-align:justify;
+
+    padding:0 40px;
+
+
+}
+
+
+
+
+
+.student-name{
+
+
+    color:#003366;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    text-decoration:underline;
+
+}
+
+
+
+
+
+.info{
+
+
+    margin-top:35px;
+
+    font-size:22px;
+
+    line-height:2;
+
+}
+
+
+
+
+
+.footer{
+
+
+    position:absolute;
+
+    bottom:90px;
+
+    left:80px;
+
+    right:80px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:18px;
+
+}
+
+
+
+.sign{
+
+    text-align:center;
+
+}
+
+
+
+.sign-line{
+
+    width:170px;
+
+    border-top:2px solid black;
+
+    margin-bottom:8px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<div class="certificate">
+
+
+<div class="bg-image">
+
+<img src="{{ url_for('static', filename='images/software_bg.png') }}">
+
+</div>
+
+
+
+<div class="inner"></div>
+
+
+
+
+<div class="content">
+
+
+
+<div class="logo">
+<img src="{{ url_for('static', filename='images/college_logo.png') }}">
+
+</div>
+
+
+
+<div class="college-name">
+
+{{ college_name }}
+
+</div>
+
+
+
+<div class="subtitle">
+
+{{ college_address }}
+
+</div>
+
+
+
+
+
+<div class="title">
+
+BONAFIDE CERTIFICATE
+
+</div>
+
+
+
+<div class="line"></div>
+
+
+
+
+
+
+<div class="description">
+
+
+This is to certify that
+
+<br>
+
+
+<span class="student-name">
+
+{{ student_name }}
+
+</span>
+
+
+<br>
+
+
+is a bonafide student of our institute.
+
+
+
+</div>
+
+
+
+
+
+
+<div class="info">
+
+
+<b>Enrollment No:</b>
+
+{{ enrollment_no }}
+
+<br>
+
+
+<b>Department:</b>
+
+{{ department }}
+
+<br>
+
+
+<b>Course:</b>
+
+{{ course }}
+
+<br>
+
+
+<b>Academic Year:</b>
+
+{{ academic_year }}
+
+
+</div>
+
+
+
+
+
+
+<div class="description">
+
+
+This certificate is issued to the student for official
+purpose as requested.
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="footer">
+
+
+<div class="sign">
+
+<div class="sign-line"></div>
+
+Class Coordinator
+
+</div>
+
+
+
+
+<div class="sign">
+
+<div class="sign-line"></div>
+
+Principal
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>

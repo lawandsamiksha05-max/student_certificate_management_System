@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Date Wise Report</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+
+            background:
+                linear-gradient(
+                    rgba(15, 23, 42, .55),
+                    rgba(37, 99, 235, .45)
+                ),
+                url("/static/images/student_bg.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container-fluid {
+
+            max-width: 1600px;
+            margin: auto;
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            background: rgba(255, 255, 255, .94);
+
+            padding: 25px 30px;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        }
+
+
+        .toolbar-left h2 {
+
+            margin: 0;
+
+            color: #1E3A8A;
+
+            font-size: 34px;
+
+            font-weight: 700;
+        }
+
+
+        .toolbar-left h2 i {
+
+            color: #3B82F6;
+
+            margin-right: 10px;
+        }
+
+
+        .toolbar-left p {
+
+            margin-top: 8px;
+
+            margin-bottom: 0;
+
+            color: #1F2937;
+
+            font-size: 16px;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn-primary {
+
+            background: #2563EB;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+            padding: 10px 22px;
+        }
+
+
+        .btn-primary:hover {
+
+            background: #1D4ED8;
+        }
+
+
+        .btn-secondary {
+
+            border-radius: 10px;
+
+            padding: 10px 22px;
+        }
+
+
+        /* =========================
+           DATE FILTER
+        ========================= */
+
+        .filter-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        }
+
+
+        .form-label {
+
+            font-size: 18px;
+
+            margin-bottom: 8px;
+
+            color: #1F2937;
+        }
+
+
+        .form-control {
+
+            height: 55px;
+
+            border-radius: 10px;
+
+            border: 1px solid #D1D5DB;
+
+            font-size: 18px;
+
+            padding: 10px 15px;
+        }
+
+
+        .form-control:focus {
+
+            border-color: #2563EB;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .15);
+        }
+
+
+        .generate-btn {
+
+            height: 55px;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            width: 100%;
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+        }
+
+
+        .table {
+
+            margin: 0;
+        }
+
+
+        .table thead th {
+
+            background: #2563EB !important;
+
+            color: #ffffff !important;
+
+            padding: 16px;
+
+            border: none;
+
+            text-transform: uppercase;
+
+            font-size: 17px;
+
+            white-space: nowrap;
+        }
+
+
+        .table tbody td {
+
+            padding: 14px 16px;
+
+            border-top: 1px solid #edf2f7;
+
+            font-size: 16px;
+
+            vertical-align: middle;
+        }
+
+
+        .table tbody tr:nth-child(even) {
+
+            background: #F8FAFC;
+        }
+
+
+        .table tbody tr:hover {
+
+            background: #EAF3FF;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 8px;
+
+            background: #DCFCE7;
+
+            color: #15803D;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           NO DATA
+        ========================= */
+
+        .no-data {
+
+            padding: 35px !important;
+
+            text-align: center;
+
+            color: #DC2626;
+
+            font-size: 18px;
+
+            font-weight: 600;
+        }
+
+
+        .no-data i {
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+
+            .toolbar {
+
+                padding: 20px;
+            }
+
+
+            .toolbar-left h2 {
+
+                font-size: 26px;
+            }
+
+
+            .toolbar-left p {
+
+                font-size: 14px;
+            }
+
+
+            .filter-card {
+
+                padding: 20px;
+            }
+
+
+            .col-md-5,
+            .col-md-2 {
+
+                width: 100%;
+
+                margin-bottom: 15px;
+            }
+
+
+            .generate-btn {
+
+                margin-top: 5px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container-fluid">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <div class="toolbar">
+
+        <div class="toolbar-left">
+
+            <h2>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                Date Wise Report
+
+            </h2>
+
+            <p>
+                View certificates generated between selected dates.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('reports') }}"
+            class="btn btn-secondary"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================
+         DATE FILTER
+    ========================= -->
+
+    <div class="filter-card">
+
+        <form
+            method="POST"
+            action="{{ url_for('date_wise_report') }}"
+        >
+
+            <div class="row g-4 align-items-end">
+
+
+                <!-- FROM DATE -->
+
+                <div class="col-md-5">
+
+                    <label
+                        for="from_date"
+                        class="form-label fw-bold"
+                    >
+
+                        From Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="from_date"
+                        name="from_date"
+                        class="form-control"
+                        value="{{ from_date or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TO DATE -->
+
+                <div class="col-md-5">
+
+                    <label
+                        for="to_date"
+                        class="form-label fw-bold"
+                    >
+
+                        To Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="to_date"
+                        name="to_date"
+                        class="form-control"
+                        value="{{ to_date or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- GENERATE -->
+
+                <div class="col-md-2 d-grid">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary generate-btn"
+                    >
+
+                        <i class="fa-solid fa-filter"></i>
+
+                        Generate
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =========================
+         REPORT TABLE
+    ========================= -->
+
+    <div class="table-card">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+
+                <!-- TABLE HEADER -->
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Student Name</th>
+
+                        <th>Certificate Type</th>
+
+                        <th>Issue Date</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- TABLE BODY -->
+
+                <tbody>
+
+                {% if certificates %}
+
+                    {% for r in certificates %}
+
+                    <tr>
+
+                        <!-- ID -->
+
+                        <td>
+
+                            {{ r.certificate_id }}
+
+                        </td>
+
+
+
+                        <!-- STUDENT NAME -->
+
+                        <td>
+
+                            {{ r.student_name }}
+
+                        </td>
+
+
+
+                        <!-- CERTIFICATE TYPE -->
+
+                        <td>
+
+                            {{ r.certificate_type }}
+
+                        </td>
+
+
+
+                        <!-- ISSUE DATE -->
+
+                        <td>
+
+                            {% if r.issue_date %}
+
+                                {% if r.issue_date.strftime is defined %}
+
+                                    {{ r.issue_date.strftime('%d-%m-%Y') }}
+
+                                {% else %}
+
+                                    {{ r.issue_date }}
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </td>
+
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            <span class="status">
+
+                                {{ r.status }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                {% else %}
+
+                    <!-- NO DATA -->
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="no-data"
+                        >
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            <strong>
+                                No certificates found for the selected dates.
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+const fromDate =
+    document.querySelector('input[name="from_date"]');
+
+const toDate =
+    document.querySelector('input[name="to_date"]');
+
+
+// From Date select केल्यानंतर
+// To Date ची minimum date set होईल.
+
+fromDate.addEventListener("change", function () {
+
+    toDate.min = this.value;
+
+});
+
+
+// Page load झाल्यावरसुद्धा
+// minimum date set करा.
+
+if (fromDate.value) {
+
+    toDate.min = fromDate.value;
+
+}
+
+
+// To Date ही From Date पेक्षा आधी असल्यास
+
+toDate.addEventListener("change", function () {
+
+    if (
+        fromDate.value &&
+        this.value < fromDate.value
+    ) {
+
+        alert(
+            "To Date cannot be before From Date."
+        );
+
+        this.value = "";
+
+    }
+
+});
+
+
+// Form submit करण्यापूर्वी date validation
+
+document.querySelector("form").addEventListener(
+    "submit",
+    function (event) {
+
+        if (
+            fromDate.value &&
+            toDate.value &&
+            toDate.value < fromDate.value
+        ) {
+
+            event.preventDefault();
+
+            alert(
+                "Please select a valid To Date."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

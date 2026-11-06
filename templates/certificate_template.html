@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Student Certificate</title>
+
+
+
+<style>
+   *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#ececec;
+    padding:20px;
+    font-family:'Times New Roman',serif;
+}
+
+/* ===========================
+   Certificate
+=========================== */
+
+.certificate{
+    width:1200px;
+    height:860px;
+    margin:20px auto;
+    background:#fff;
+    position:relative;
+    overflow:hidden;
+    padding:30px 70px;
+    box-shadow:0 0 20px rgba(0,0,0,.25);
+}
+
+/* ===========================
+   Border
+=========================== */
+
+.border{
+    position:absolute;
+    inset:0;
+    z-index:0;
+}
+
+.border img{
+    width:100%;
+    height:100%;
+}
+
+/* ===========================
+   Watermark
+=========================== */
+
+.watermark{
+    position:absolute;
+    top:280px;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:.05;
+    z-index:1;
+}
+
+.watermark img{
+    width:230px;
+}
+
+/* ===========================
+   Above Watermark
+=========================== */
+
+.header,
+.ribbon,
+.title,
+.content,
+.bottom,
+.footer,
+.certno{
+    position:relative;
+    z-index:5;
+}
+
+/* ===========================
+   Certificate Number
+=========================== */
+
+.certno{
+    position:absolute;
+    top:32px;
+    right:45px;
+    font-size:16px;
+    color:#0B3C5D;
+    font-weight:bold;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+
+    margin-top:45px;   /* Increase this value to move header downward */
+}
+
+.logo{
+    width:95px;
+    height:auto;
+}
+
+.college{
+    text-align:center;
+}
+
+.college h1{
+    font-size:34px;
+    color:#0B3C5D;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.college h3{
+    font-size:20px;
+    margin-top:5px;
+}
+
+.college p{
+    font-size:14px;
+    color:#666;
+}
+
+/* ===========================
+   Ribbon
+=========================== */
+
+.ribbon{
+    width:430px;
+    margin:18px auto;
+    background:#123d6a;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-size:20px;
+    font-weight:bold;
+    border-radius:5px;
+}
+
+/* ===========================
+   Title
+=========================== */
+
+.title{
+    text-align:center;
+    margin-top:15px;
+}
+
+.title h2{
+    font-size:48px;
+    color:#C9A227;
+    font-weight:bold;
+}
+
+.title hr{
+    width:420px;
+    margin:10px auto;
+}
+
+/* ===========================
+   Content
+=========================== */
+
+.content{
+    margin-top:12px;
+}
+
+
+.certificate-text{
+    width:78%;
+    margin:auto;
+    text-align:center;
+    font-size:19px;
+    line-height:1.5;
+    color:#333;
+}
+
+.student-name{
+    display:block;
+    margin:8px 0;
+    font-size:44px;
+    color:#123d6a;
+    font-weight:bold;
+}
+
+.certificate-text strong{
+    color:#C9A227;
+}
+
+/* ===========================
+   Bottom
+=========================== */
+
+.bottom{
+    margin-top:45px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:flex-end;
+}
+
+.left,
+.center,
+.sign{
+    text-align:center;
+}
+
+.left img,
+.center img{
+    width:80px;
+}
+
+.left p,
+.center p{
+    margin-top:8px;
+    font-size:14px;
+}
+
+.sign{
+    width:220px;
+}
+
+.sign img{
+    width:110px;
+    height:auto;
+}
+
+.sign hr{
+    width:170px;
+    margin:6px auto;
+    border:1px solid #0B3C5D;
+}
+
+.sign h4{
+    font-size:18px;
+    color:#123d6a;
+}
+
+.sign p{
+    font-size:14px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.footer{
+    margin-top:20px;
+    text-align:center;
+    font-size:13px;
+    color:#555;
+}
+
+.footer hr{
+    width:90%;
+    margin:12px auto;
+    border:1px solid #C9A227;
+}
+.print-btn{
+    background:#0B3C5D;
+    color:white;
+    padding:12px 25px;
+    border:none;
+    border-radius:6px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.print-btn:hover{
+    background:#1a5b8f;
+}
+@media print {
+
+    .print-btn {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+    <body>
+
+<button class="print-btn" onclick="downloadPDF()">
+    Download PDF
+</button>
+
+<div class="certificate">
+    <div class="border">
+   <img src="http://127.0.0.1:5000/static/images/border.png">
+</div>
+
+<div class="watermark">
+
+<img src="http://127.0.0.1:5000/static/images/watermark.png">
+
+</div>
+
+<div class="certno">
+
+Certificate No :
+SCMS-{{ certificate[5] }}
+
+</div>
+
+<div class="header">
+
+    <img class="logo"
+src="http://127.0.0.1:5000/static/images/college_logo.png">
+
+    <div class="college">
+
+        <h1>SVERI'S COLLEGE OF ENGINEERING</h1>
+
+        <h3>Pandharpur</h3>
+
+        <p>Approved by AICTE | NAAC Accredited</p>
+
+    </div>
+
+</div>
+
+<!-- Ribbon Starts Here -->
+
+<div class="ribbon">
+    CERTIFICATE OF ACHIEVEMENT
+</div>
+
+<!-- Ribbon Ends Here -->
+
+<div class="title">
+
+    <h2>COURSE COMPLETION CERTIFICATE</h2>
+
+    <hr>
+
+</div>
+
+<div class="content">
+
+    <div class="certificate-text">
+This is to proudly certify that
+
+<span class="student-name">{{ certificate[0] }}</span>
+
+bearing Enrollment Number
+<strong>{{ certificate[1] }}</strong>
+from the
+<strong>{{ certificate[2] }}</strong>
+Department has successfully completed the
+<strong>{{ certificate[3] }}</strong>
+conducted by
+<strong>SVERI'S College of Engineering, Pandharpur.</strong>
+
+This certificate is awarded in recognition of the student's successful completion of the course.
+
+Issued on
+<strong>{{ certificate[4] }}</strong>.
+
+</p>
+
+</div>
+<div class="bottom">
+
+    <!-- Official Seal -->
+
+    <div class="left">
+
+       <img src="http://127.0.0.1:5000/static/images/seal.png">
+
+        <p>Official Seal</p>
+
+    </div>
+
+    <!-- QR -->
+
+    <div class="center">
+
+      <img src="http://127.0.0.1:5000/static/images/qr.png">
+
+        <p>Scan to Verify</p>
+
+    </div>
+
+    <!-- HOD -->
+
+    <div class="sign">
+
+       <img src="http://127.0.0.1:5000/static/images/hod_sign.png">
+
+        <hr>
+
+        <h4>Head of Department</h4>
+
+        <p>Computer Engineering</p>
+
+    </div>
+
+    <!-- Principal -->
+
+    <div class="sign">
+
+       <img src="http://127.0.0.1:5000/static/images/principal_sign.png">
+
+        <hr>
+
+        <h4>Principal</h4>
+
+        <p>SVERI'S College of Engineering</p>
+
+    </div>
+
+</div> <!-- End of bottom -->
+
+<div class="footer">
+
+    <hr style="margin-top:30px;border:1px solid #C9A227;">
+
+    <p>
+        This certificate has been digitally generated by
+        <b>SVERI'S College of Engineering, Pandharpur.</b>
+    </p>
+
+    <p style="margin-top:8px;">
+        No physical signature is required for its authenticity.
+    </p>
+
+    <p style="margin-top:8px;font-size:13px;color:#777;">
+        © 2026 Student Certificate Management System
+    </p>
+
+</div>
+
+</div> <!-- End certificate -->
+<script>
+function downloadPDF() {
+    window.print();
+}
+</script>
+</body>
+</html>

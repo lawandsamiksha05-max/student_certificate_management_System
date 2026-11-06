@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>College Leaving Certificate</title>
+
+<style>
+
+@page{
+    size:A4 portrait;
+    margin:0;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    width:794px;
+    height:1123px;
+
+    font-family:"Times New Roman",serif;
+
+    background:white;
+
+}
+
+
+
+.certificate{
+
+
+    width:794px;
+    height:1123px;
+
+    border:14px solid #0B3C6F;
+
+    padding:25px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.certificate:before{
+
+    content:"";
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+    right:18px;
+    bottom:18px;
+
+    border:3px solid #D4AF37;
+
+}
+
+
+
+.content{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+}
+
+
+
+
+.logo img{
+
+    width:100px;
+
+    height:100px;
+
+}
+
+
+
+.college-name{
+
+    margin-top:10px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#003366;
+
+}
+
+
+
+.address{
+
+    font-size:18px;
+
+    margin-top:8px;
+
+}
+
+
+
+.title{
+
+    margin-top:35px;
+
+    font-size:36px;
+
+    font-weight:bold;
+
+    color:#003366;
+
+    text-decoration:underline;
+
+}
+
+
+
+.subtitle{
+
+    margin-top:10px;
+
+    font-size:20px;
+
+}
+
+
+
+
+.details{
+
+    margin-top:35px;
+
+    padding:0 45px;
+
+    text-align:left;
+
+    font-size:21px;
+
+    line-height:2;
+
+}
+
+
+
+.row{
+
+    display:flex;
+
+}
+
+
+
+.label{
+
+    width:280px;
+
+    font-weight:bold;
+
+}
+
+
+
+.value{
+
+    flex:1;
+
+}
+
+
+
+
+.declaration{
+
+    margin-top:35px;
+
+    padding:0 45px;
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    text-align:justify;
+
+}
+
+
+
+.footer{
+
+    position:absolute;
+
+    bottom:90px;
+
+    left:70px;
+
+    right:70px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+
+
+.signature{
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+
+
+.line{
+
+    width:180px;
+
+    border-top:2px solid black;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.date{
+
+    position:absolute;
+
+    bottom:130px;
+
+    left:80px;
+
+    font-size:18px;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="certificate">
+
+
+
+<div class="content">
+
+
+
+<div class="logo">
+
+<img src="{{ url_for('static', filename='images/college_logo.png') }}">
+
+</div>
+
+
+
+<div class="college-name">
+
+{{ college_name }}
+
+</div>
+
+
+<div class="address">
+
+{{ college_address }}
+
+</div>
+
+
+
+
+<div class="title">
+
+COLLEGE LEAVING CERTIFICATE
+
+</div>
+
+
+
+<div class="subtitle">
+
+(Transfer Certificate)
+
+</div>
+
+
+
+
+
+<div class="details">
+
+
+<div class="row">
+
+<div class="label">
+Student Name:
+</div>
+
+<div class="value">
+{{ student_name }}
+</div>
+
+</div>
+
+
+
+<div class="row">
+
+<div class="label">
+Enrollment Number:
+</div>
+
+<div class="value">
+{{ enrollment_no }}
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+<div class="label">
+Course:
+</div>
+
+<div class="value">
+{{ course }}
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+<div class="label">
+Department:
+</div>
+
+<div class="value">
+{{ department }}
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+<div class="label">
+Date of Birth:
+</div>
+
+<div class="value">
+{{ dob }}
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+<div class="label">
+Admission Year:
+</div>
+
+<div class="value">
+{{ admission_year }}
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+<div class="label">
+Leaving Date:
+</div>
+
+<div class="value">
+{{ leaving_date }}
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="declaration">
+
+This is to certify that the above mentioned student was a
+bonafide student of our institution. The student has completed
+the required academic requirements and is permitted to leave
+the college. This leaving certificate is issued on request for
+future academic and official purposes.
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="date">
+
+Date: {{ issue_date }}
+
+</div>
+
+
+
+
+<div class="footer">
+
+
+<div class="signature">
+
+<div class="line"></div>
+
+Class Coordinator
+
+</div>
+
+
+
+<div class="signature">
+
+<div class="line"></div>
+
+Principal
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</body>
+
+</html>

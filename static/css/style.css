@@ -1,0 +1,38 @@
+/* Existing dashboard CSS */
+
+
+/* ==========================
+   AI ASSISTANT DESIGN
+========================== */
+
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#dbeafe,transparent 35%),
+    radial-gradient(circle at bottom right,#bfdbfe,transparent 35%),
+    linear-gradient(135deg,#f8fafc,#e0f2fe);
+
+    min-height:100vh;
+}
+
+
+.chat-container {
+
+    width:80%;
+    max-width:900px;
+
+    margin:50px auto;
+
+    background:rgba(255,255,255,0.85);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+
+    backdrop-filter:blur(10px);
+
+}

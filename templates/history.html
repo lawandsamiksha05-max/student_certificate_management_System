@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Activity History - SCMS</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/history.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h3>SCMS</h3>
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="/dashboard">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/students">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Students
+                </a>
+            </li>
+
+            <li>
+                <a href="/certificates">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Certificates
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/history">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    History
+                </a>
+            </li>
+
+            <li>
+                <a href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    Activity History
+                </h1>
+
+                <p>
+                    View all activities performed in the Student Certificate System.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= HISTORY CARD ================= -->
+
+        <div class="history-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Recent Activities</h2>
+
+                    <p>
+                        Student and certificate system activities
+                    </p>
+
+                </div>
+
+                <div class="history-icon">
+
+                    <i class="fa-solid fa-list-check"></i>
+
+                </div>
+
+            </div>
+
+
+            {% if error %}
+
+                <div class="error-message">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    {{ error }}
+
+                </div>
+
+            {% endif %}
+
+
+            {% if history %}
+
+                <div class="table-container">
+
+                    <table class="history-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Sr.No.</th>
+
+                                <th>Admin</th>
+
+                                <th>Action</th>
+
+                                <th>Details</th>
+
+                                <th>Date & Time</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for item in history %}
+
+                            <tr>
+
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+
+
+                                <td>
+
+                                    <span class="admin-name">
+
+                                        <i class="fa-solid fa-user"></i>
+
+                                        {{ item.admin_name }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.action == "Student Added" %}
+
+                                        <span class="badge green">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                            Student Added
+                                        </span>
+
+                                    {% elif item.action == "Student Updated" %}
+
+                                        <span class="badge blue">
+                                            <i class="fa-solid fa-user-pen"></i>
+                                            Student Updated
+                                        </span>
+
+                                    {% elif item.action == "Student Deleted" %}
+
+                                        <span class="badge red">
+                                            <i class="fa-solid fa-user-minus"></i>
+                                            Student Deleted
+                                        </span>
+
+                                    {% elif item.action == "Certificate Generated" %}
+
+                                        <span class="badge purple">
+                                            <i class="fa-solid fa-certificate"></i>
+                                            Certificate Generated
+                                        </span>
+
+                                    {% elif item.action == "Certificate Emailed" %}
+
+                                        <span class="badge orange">
+                                            <i class="fa-solid fa-envelope"></i>
+                                            Certificate Emailed
+                                        </span>
+
+                                    {% elif item.action == "Certificate Sent" %}
+
+                                        <span class="badge teal">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            Certificate Sent
+                                        </span>
+
+                                    {% elif item.action == "Certificate Verified" %}
+
+                                        <span class="badge green">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Certificate Verified
+                                        </span>
+
+                                    {% elif item.action == "Admin Login" %}
+
+                                        <span class="badge blue">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                            Admin Login
+                                        </span>
+
+                                    {% elif item.action == "Admin Logout" %}
+
+                                        <span class="badge gray">
+                                            <i class="fa-solid fa-right-from-bracket"></i>
+                                            Admin Logout
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="badge">
+                                            {{ item.action }}
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td class="details">
+
+                                    {{ item.details }}
+
+                                </td>
+
+
+                                <td class="date">
+
+                                    <i class="fa-regular fa-calendar"></i>
+
+                                    {{ item.action_date }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    </div>
+
+                    <h3>No History Available</h3>
+
+                    <p>
+                        Activities will appear here when you perform actions.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

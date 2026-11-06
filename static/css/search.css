@@ -1,0 +1,36 @@
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.add-btn {
+    background: #2864e6;
+    color: white;
+    padding: 18px 28px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search-btn {
+    background: #7c3aed;
+    color: white;
+    padding: 18px 28px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search-btn:hover {
+    background: #6024c7;
+}
+
+.excel-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
